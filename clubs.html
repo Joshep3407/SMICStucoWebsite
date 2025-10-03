@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubs - Student Council Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Top Navigation Bars */
+        .top-nav {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .top-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Clubs Grid */
+        .clubs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .club-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .club-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .club-image {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-size: 16px;
+        }
+        
+        .science { background: linear-gradient(135deg, #3498db, #2ecc71); }
+        .debate { background: linear-gradient(135deg, #e74c3c, #e67e22); }
+        .art { background: linear-gradient(135deg, #9b59b6, #e74c3c); }
+        .music { background: linear-gradient(135deg, #34495e, #3498db); }
+        .sports { background: linear-gradient(135deg, #2ecc71, #f1c40f); }
+        .volunteer { background: linear-gradient(135deg, #e67e22, #e74c3c); }
+        .tech { background: linear-gradient(135deg, #2c3e50, #3498db); }
+        .writing { background: linear-gradient(135deg, #9b59b6, #34495e); }
+        
+        .club-content {
+            padding: 25px;
+        }
+        
+        .club-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        .club-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        
+        .club-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Categories Section */
+        .categories {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 40px 0;
+        }
+        
+        .categories h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .category-tag {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-tag:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        /* How to Join Section */
+        .join-section {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 50px 0;
+            margin: 60px 0 40px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        
+        .join-section h2 {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        
+        .join-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        .btn-light {
+            display: inline-block;
+            background-color: white;
+            color: #3498db;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-light:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+        
+        .footer-section p {
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .clubs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="container">
+            <div class="logo">StucoWebsite</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="clubs.html" style="color: #3498db;">Clubs</a>
+                <a href="competitions.html">Competitions</a>
+                <a href="#">Events</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Student Clubs & Organizations</h1>
+            <p>Discover your passion, develop new skills, and make lasting connections</p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Categories Section -->
+        <section class="categories">
+            <h2>Browse by Category</h2>
+            <div class="category-tags">
+                <div class="category-tag">Academic</div>
+                <div class="category-tag">Arts & Culture</div>
+                <div class="category-tag">Sports & Recreation</div>
+                <div class="category-tag">Community Service</div>
+                <div class="category-tag">Technology</div>
+                <div class="category-tag">Leadership</div>
+                <div class="category-tag">Special Interest</div>
+            </div>
+        </section>
+        
+        <!-- Clubs Grid -->
+        <section class="clubs-grid">
+            <!-- Science Club -->
+            <div class="club-card">
+                <div class="club-image science">
+                    Science Club
+                </div>
+                <div class="club-content">
+                    <h3>Science Club</h3>
+                    <p>Explore the wonders of science through experiments, projects, and competitions. Perfect for curious minds!</p>
+                    <div class="club-meta">
+                        <span>Meets: Tuesdays, 3:30 PM</span>
+                        <span>Room: 204</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Debate Society -->
+            <div class="club-card">
+                <div class="club-image debate">
+                    Debate Society
+                </div>
+                <div class="club-content">
+                    <h3>Debate Society</h3>
+                    <p>Develop critical thinking and public speaking skills while discussing important topics and competing in tournaments.</p>
+                    <div class="club-meta">
+                        <span>Meets: Wednesdays, 4:00 PM</span>
+                        <span>Room: 105</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Art Club -->
+            <div class="club-card">
+                <div class="club-image art">
+                    Art Club
+                </div>
+                <div class="club-content">
+                    <h3>Art Club</h3>
+                    <p>Express your creativity through various mediums including painting, drawing, sculpture, and digital art.</p>
+                    <div class="club-meta">
+                        <span>Meets: Mondays, 3:45 PM</span>
+                        <span>Room: Art Studio</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Music Club -->
+            <div class="club-card">
+                <div class="club-image music">
+                    Music Club
+                </div>
+                <div class="club-content">
+                    <h3>Music Club</h3>
+                    <p>Whether you're a musician or just love music, join us for jam sessions, performances, and music appreciation.</p>
+                    <div class="club-meta">
+                        <span>Meets: Thursdays, 3:30 PM</span>
+                        <span>Room: Music Hall</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Sports Club -->
+            <div class="club-card">
+                <div class="club-image sports">
+                    Sports Club
+                </div>
+                <div class="club-content">
+                    <h3>Sports Club</h3>
+                    <p>Stay active and have fun with various sports activities, intramural competitions, and fitness challenges.</p>
+                    <div class="club-meta">
+                        <span>Meets: Daily, 4:00 PM</span>
+                        <span>Location: Gym/Field</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Volunteer Club -->
+            <div class="club-card">
+                <div class="club-image volunteer">
+                    Volunteer Club
+                </div>
+                <div class="club-content">
+                    <h3>Volunteer Club</h3>
+                    <p>Make a difference in our community through various service projects and volunteer opportunities.</p>
+                    <div class="club-meta">
+                        <span>Meets: Fridays, 3:30 PM</span>
+                        <span>Room: 302</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Tech Club -->
+            <div class="club-card">
+                <div class="club-image tech">
+                    Tech Club
+                </div>
+                <div class="club-content">
+                    <h3>Tech Club</h3>
+                    <p>Explore coding, robotics, web development, and other technology topics through hands-on projects.</p>
+                    <div class="club-meta">
+                        <span>Meets: Tuesdays, 4:00 PM</span>
+                        <span>Room: Computer Lab</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <!-- Writing Club -->
+            <div class="club-card">
+                <div class="club-image writing">
+                    Writing Club
+                </div>
+                <div class="club-content">
+                    <h3>Writing Club</h3>
+                    <p>Share your writing, get feedback, and improve your skills in various genres from poetry to fiction.</p>
+                    <div class="club-meta">
+                        <span>Meets: Mondays, 3:30 PM</span>
+                        <span>Room: 208</span>
+                    </div>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- How to Join Section -->
+        <section class="join-section">
+            <h2>Interested in Joining?</h2>
+            <p>All students are welcome to join any club! Attend a meeting, talk to the club advisor, or contact the student council for more information.</p>
+            <a href="#" class="btn-light">Contact Student Council</a>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>The Student Council represents the student body, organizes events, and works to improve school life for everyone.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html" style="color: white; text-decoration: none;">Home</a></p>
+                    <p><a href="clubs.html" style="color: white; text-decoration: none;">Clubs</a></p>
+                    <p><a href="competitions.html" style="color: white; text-decoration: none;">Competitions</a></p>
+                    <p><a href="#" style="color: white; text-decoration: none;">Contact</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: stuco@ourschool.edu</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Office: Room 201, Main Building</p>
+                    
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">TW</a>
+                        <a href="#">YT</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Student Council Website. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
