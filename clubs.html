@@ -108,15 +108,28 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
-        .club-image {
+        .club-photo {
             width: 100%;
             height: 200px;
-            background-color: #ddd;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #777;
+            color: white;
             font-size: 16px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .club-photo::after {
+            content: "Club Photo";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
         }
         
         .science { background: linear-gradient(135deg, #3498db, #2ecc71); }
@@ -142,6 +155,13 @@
             color: #666;
             margin-bottom: 15px;
             font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .club-details {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
         }
         
         .club-meta {
@@ -149,23 +169,19 @@
             justify-content: space-between;
             color: #7f8c8d;
             font-size: 14px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
-        .btn {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
+        .club-advisor {
+            color: #3498db;
             font-weight: 500;
-            transition: background-color 0.3s;
-            font-size: 14px;
+            margin-bottom: 10px;
         }
         
-        .btn:hover {
-            background-color: #2980b9;
+        .club-activities {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
         }
         
         /* Categories Section */
@@ -323,9 +339,8 @@
                 <a href="index.html">Home</a>
                 <a href="clubs.html" style="color: #3498db;">Clubs</a>
                 <a href="competitions.html">Competitions</a>
-                <a href="#">Events</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
+                <a href="events.html">Events</a>
+                <a href="about.html">About</a>
             </div>
         </div>
     </nav>
@@ -358,129 +373,153 @@
         <section class="clubs-grid">
             <!-- Science Club -->
             <div class="club-card">
-                <div class="club-image science">
-                    Science Club
+                <div class="club-photo science">
+                    Science Club Activities
                 </div>
                 <div class="club-content">
                     <h3>Science Club</h3>
-                    <p>Explore the wonders of science through experiments, projects, and competitions. Perfect for curious minds!</p>
-                    <div class="club-meta">
-                        <span>Meets: Tuesdays, 3:30 PM</span>
-                        <span>Room: 204</span>
+                    <p>Explore the wonders of science through experiments, projects, and competitions. Perfect for curious minds who want to discover how the world works!</p>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Tuesdays, 3:30 PM</span>
+                            <span>Room: 204</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Dr. Sarah Johnson</div>
+                        <div class="club-activities">Activities: Lab experiments, science fair preparation, guest speakers</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
             
             <!-- Debate Society -->
             <div class="club-card">
-                <div class="club-image debate">
-                    Debate Society
+                <div class="club-photo debate">
+                    Debate Society Session
                 </div>
                 <div class="club-content">
                     <h3>Debate Society</h3>
                     <p>Develop critical thinking and public speaking skills while discussing important topics and competing in tournaments.</p>
-                    <div class="club-meta">
-                        <span>Meets: Wednesdays, 4:00 PM</span>
-                        <span>Room: 105</span>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Wednesdays, 4:00 PM</span>
+                            <span>Room: 105</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Mr. Robert Chen</div>
+                        <div class="club-activities">Activities: Practice debates, tournament preparation, argument construction</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
             
             <!-- Art Club -->
             <div class="club-card">
-                <div class="club-image art">
-                    Art Club
+                <div class="club-photo art">
+                    Art Club Gallery
                 </div>
                 <div class="club-content">
                     <h3>Art Club</h3>
                     <p>Express your creativity through various mediums including painting, drawing, sculpture, and digital art.</p>
-                    <div class="club-meta">
-                        <span>Meets: Mondays, 3:45 PM</span>
-                        <span>Room: Art Studio</span>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Mondays, 3:45 PM</span>
+                            <span>Room: Art Studio</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Ms. Elena Rodriguez</div>
+                        <div class="club-activities">Activities: Studio work, exhibitions, technique workshops</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
             
             <!-- Music Club -->
             <div class="club-card">
-                <div class="club-image music">
-                    Music Club
+                <div class="club-photo music">
+                    Music Club Performance
                 </div>
                 <div class="club-content">
                     <h3>Music Club</h3>
                     <p>Whether you're a musician or just love music, join us for jam sessions, performances, and music appreciation.</p>
-                    <div class="club-meta">
-                        <span>Meets: Thursdays, 3:30 PM</span>
-                        <span>Room: Music Hall</span>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Thursdays, 3:30 PM</span>
+                            <span>Room: Music Hall</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Mr. David Wilson</div>
+                        <div class="club-activities">Activities: Group performances, music theory, instrument practice</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
             
             <!-- Sports Club -->
             <div class="club-card">
-                <div class="club-image sports">
-                    Sports Club
+                <div class="club-photo sports">
+                    Sports Club Activities
                 </div>
                 <div class="club-content">
                     <h3>Sports Club</h3>
                     <p>Stay active and have fun with various sports activities, intramural competitions, and fitness challenges.</p>
-                    <div class="club-meta">
-                        <span>Meets: Daily, 4:00 PM</span>
-                        <span>Location: Gym/Field</span>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Daily, 4:00 PM</span>
+                            <span>Location: Gym/Field</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Coach Michael Thompson</div>
+                        <div class="club-activities">Activities: Team sports, fitness training, intramural competitions</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
             
             <!-- Volunteer Club -->
             <div class="club-card">
-                <div class="club-image volunteer">
-                    Volunteer Club
+                <div class="club-photo volunteer">
+                    Volunteer Club Projects
                 </div>
                 <div class="club-content">
                     <h3>Volunteer Club</h3>
                     <p>Make a difference in our community through various service projects and volunteer opportunities.</p>
-                    <div class="club-meta">
-                        <span>Meets: Fridays, 3:30 PM</span>
-                        <span>Room: 302</span>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Fridays, 3:30 PM</span>
+                            <span>Room: 302</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Mrs. Jennifer Lee</div>
+                        <div class="club-activities">Activities: Community service, fundraising, awareness campaigns</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
             
             <!-- Tech Club -->
             <div class="club-card">
-                <div class="club-image tech">
-                    Tech Club
+                <div class="club-photo tech">
+                    Tech Club Projects
                 </div>
                 <div class="club-content">
                     <h3>Tech Club</h3>
                     <p>Explore coding, robotics, web development, and other technology topics through hands-on projects.</p>
-                    <div class="club-meta">
-                        <span>Meets: Tuesdays, 4:00 PM</span>
-                        <span>Room: Computer Lab</span>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Tuesdays, 4:00 PM</span>
+                            <span>Room: Computer Lab</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Mr. Alex Carter</div>
+                        <div class="club-activities">Activities: Coding projects, robotics competitions, tech workshops</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
             
             <!-- Writing Club -->
             <div class="club-card">
-                <div class="club-image writing">
-                    Writing Club
+                <div class="club-photo writing">
+                    Writing Club Session
                 </div>
                 <div class="club-content">
                     <h3>Writing Club</h3>
                     <p>Share your writing, get feedback, and improve your skills in various genres from poetry to fiction.</p>
-                    <div class="club-meta">
-                        <span>Meets: Mondays, 3:30 PM</span>
-                        <span>Room: 208</span>
+                    <div class="club-details">
+                        <div class="club-meta">
+                            <span>Meets: Mondays, 3:30 PM</span>
+                            <span>Room: 208</span>
+                        </div>
+                        <div class="club-advisor">Advisor: Ms. Patricia Moore</div>
+                        <div class="club-activities">Activities: Writing workshops, peer reviews, publication preparation</div>
                     </div>
-                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
         </section>
@@ -489,7 +528,7 @@
         <section class="join-section">
             <h2>Interested in Joining?</h2>
             <p>All students are welcome to join any club! Attend a meeting, talk to the club advisor, or contact the student council for more information.</p>
-            <a href="#" class="btn-light">Contact Student Council</a>
+            <a href="about.html" class="btn-light">Contact Student Council</a>
         </section>
     </div>
     
@@ -507,20 +546,20 @@
                     <p><a href="index.html" style="color: white; text-decoration: none;">Home</a></p>
                     <p><a href="clubs.html" style="color: white; text-decoration: none;">Clubs</a></p>
                     <p><a href="competitions.html" style="color: white; text-decoration: none;">Competitions</a></p>
-                    <p><a href="#" style="color: white; text-decoration: none;">Contact</a></p>
+                    <p><a href="about.html" style="color: white; text-decoration: none;">About</a></p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Contact Us</h3>
+                    <h3>Get In Touch</h3>
                     <p>Email: stuco@ourschool.edu</p>
                     <p>Phone: (123) 456-7890</p>
                     <p>Office: Room 201, Main Building</p>
                     
                     <div class="social-links">
-                        <a href="#">FB</a>
-                        <a href="#">IG</a>
-                        <a href="#">TW</a>
-                        <a href="#">YT</a>
+                        <a href="https://facebook.com">FB</a>
+                        <a href="https://instagram.com">IG</a>
+                        <a href="https://twitter.com">TW</a>
+                        <a href="https://youtube.com">YT</a>
                     </div>
                 </div>
             </div>
