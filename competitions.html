@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitions - Student Council Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Top Navigation Bars */
+        .top-nav {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .top-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Competition Categories */
+        .categories {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 40px 0;
+        }
+        
+        .categories h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .category-tag {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-tag:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        /* Competitions Grid */
+        .competitions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .competition-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .competition-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .competition-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .science { background: linear-gradient(135deg, #3498db, #2ecc71); }
+        .math { background: linear-gradient(135deg, #e74c3c, #e67e22); }
+        .debate { background: linear-gradient(135deg, #9b59b6, #e74c3c); }
+        .sports { background: linear-gradient(135deg, #2ecc71, #f1c40f); }
+        .art { background: linear-gradient(135deg, #e67e22, #e74c3c); }
+        .tech { background: linear-gradient(135deg, #2c3e50, #3498db); }
+        .writing { background: linear-gradient(135deg, #9b59b6, #34495e); }
+        .music { background: linear-gradient(135deg, #34495e, #3498db); }
+        
+        .competition-content {
+            padding: 25px;
+        }
+        
+        .competition-content h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        .competition-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        
+        .competition-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Upcoming Deadlines */
+        .deadlines {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 40px 0;
+        }
+        
+        .deadlines h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .deadline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .deadline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .deadline-info h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .deadline-date {
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        /* How to Participate Section */
+        .participate-section {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 50px 0;
+            margin: 60px 0 40px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        
+        .participate-section h2 {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+        
+        .participate-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+        
+        .btn-light {
+            display: inline-block;
+            background-color: white;
+            color: #3498db;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-light:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+        
+        .footer-section p {
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .competitions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+            
+            .deadline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="container">
+            <div class="logo">StucoWebsite</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="clubs.html">Clubs</a>
+                <a href="competitions.html" style="color: #3498db;">Competitions</a>
+                <a href="events.html">Events</a>
+                <a href="about.html">About</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Student Competitions</h1>
+            <p>Showcase your talents, challenge yourself, and win amazing prizes!</p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Categories Section -->
+        <section class="categories">
+            <h2>Competition Categories</h2>
+            <div class="category-tags">
+                <div class="category-tag">Academic</div>
+                <div class="category-tag">Sports</div>
+                <div class="category-tag">Arts & Creative</div>
+                <div class="category-tag">Technology</div>
+                <div class="category-tag">Leadership</div>
+                <div class="category-tag">Community</div>
+            </div>
+        </section>
+        
+        <!-- Competitions Grid -->
+        <section class="competitions-grid">
+            <!-- Science Fair -->
+            <div class="competition-card">
+                <div class="competition-image science">
+                    Annual Science Fair
+                </div>
+                <div class="competition-content">
+                    <h3>Annual Science Fair</h3>
+                    <p>Present your innovative science projects and research. Open to all grade levels with categories for different scientific disciplines.</p>
+                    <div class="competition-meta">
+                        <span>Date: March 15, 2024</span>
+                        <span>Prize: $500</span>
+                    </div>
+                    <a href="science-fair.html" class="btn">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Math Olympiad -->
+            <div class="competition-card">
+                <div class="competition-image math">
+                    Math Olympiad
+                </div>
+                <div class="competition-content">
+                    <h3>Math Olympiad</h3>
+                    <p>Test your mathematical skills in this challenging competition. Individual and team categories available.</p>
+                    <div class="competition-meta">
+                        <span>Date: April 5, 2024</span>
+                        <span>Prize: Trophy + $300</span>
+                    </div>
+                    <a href="math-olympiad.html" class="btn">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Debate Championship -->
+            <div class="competition-card">
+                <div class="competition-image debate">
+                    Debate Championship
+                </div>
+                <div class="competition-content">
+                    <h3>Debate Championship</h3>
+                    <p>Compete in parliamentary style debates on current issues. Develop critical thinking and public speaking skills.</p>
+                    <div class="competition-meta">
+                        <span>Date: February 28, 2024</span>
+                        <span>Prize: Medal + $200</span>
+                    </div>
+                    <a href="debate-championship.html" class="btn">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Sports Tournament -->
+            <div class="competition-card">
+                <div class="competition-image sports">
+                    Sports Tournament
+                </div>
+                <div class="competition-content">
+                    <h3>Annual Sports Tournament</h3>
+                    <p>Basketball, soccer, volleyball and more! Compete individually or as a team in various sports categories.</p>
+                    <div class="competition-meta">
+                        <span>Date: Ongoing</span>
+                        <span>Prize: Trophies</span>
+                    </div>
+                    <a href="sports-tournament.html" class="btn">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Art Competition -->
+            <div class="competition-card">
+                <div class="competition-image art">
+                    Art Competition
+                </div>
+                <div class="competition-content">
+                    <h3>Young Artists Showcase</h3>
+                    <p>Display your artistic talents in painting, drawing, sculpture, or digital art. Multiple categories and themes.</p>
+                    <div class="competition-meta">
+                        <span>Date: May 10, 2024</span>
+                        <span>Prize: Exhibition + $250</span>
+                    </div>
+                    <a href="art-competition.html" class="btn">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Coding Challenge -->
+            <div class="competition-card">
+                <div class="competition-image tech">
+                    Coding Challenge
+                </div>
+                <div class="competition-content">
+                    <h3>Code Masters Challenge</h3>
+                    <p>Solve programming problems in this exciting coding competition. Languages: Python, Java, and JavaScript.</p>
+                    <div class="competition-meta">
+                        <span>Date: April 20, 2024</span>
+                        <span>Prize: Tech Gadgets</span>
+                    </div>
+                    <a href="coding-challenge.html" class="btn">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Writing Contest -->
+            <div class="competition-card">
+                <div class="competition-image writing">
+                    Writing Contest
+                </div>
+                <div class="competition-content">
+                    <h3>Creative Writing Contest</h3>
+                    <p>Submit your original stories, poems, or essays. Categories for fiction, non-fiction, and poetry.</p>
+                    <div class="competition-meta">
+                        <span>Date: March 30, 2024</span>
+                        <span>Prize: Publication + $150</span>
+                    </div>
+                    <a href="writing-contest.html" class="btn">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Music Competition -->
+            <div class="competition-card">
+                <div class="competition-image music">
+                    Music Competition
+                </div>
+                <div class="competition-content">
+                    <h3>Battle of the Bands</h3>
+                    <p>Show off your musical talents! Solo performers and bands welcome. Various instrument categories available.</p>
+                    <div class="competition-meta">
+                        <span>Date: June 5, 2024</span>
+                        <span>Prize: Recording Time</span>
+                    </div>
+                    <a href="music-competition.html" class="btn">Register Now</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Upcoming Deadlines -->
+        <section class="deadlines">
+            <h2>Upcoming Registration Deadlines</h2>
+            <div class="deadline-list">
+                <div class="deadline-item">
+                    <div class="deadline-info">
+                        <h4>Debate Championship</h4>
+                        <p>Register before spaces fill up!</p>
+                    </div>
+                    <div class="deadline-date">Feb 20, 2024</div>
+                </div>
+                <div class="deadline-item">
+                    <div class="deadline-info">
+                        <h4>Science Fair</h4>
+                        <p>Project proposals due</p>
+                    </div>
+                    <div class="deadline-date">Mar 1, 2024</div>
+                </div>
+                <div class="deadline-item">
+                    <div class="deadline-info">
+                        <h4>Math Olympiad</h4>
+                        <p>Last day to register</p>
+                    </div>
+                    <div class="deadline-date">Mar 25, 2024</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- How to Participate Section -->
+        <section class="participate-section">
+            <h2>Ready to Compete?</h2>
+            <p>Registration is open for all competitions! Sign up individually or as a team. Contact your club advisor or student council for more information.</p>
+            <a href="about.html" class="btn-light">Contact Student Council</a>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>The Student Council represents the student body, organizes events, and works to improve school life for everyone.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="index.html" style="color: white; text-decoration: none;">Home</a></p>
+                    <p><a href="clubs.html" style="color: white; text-decoration: none;">Clubs</a></p>
+                    <p><a href="competitions.html" style="color: white; text-decoration: none;">Competitions</a></p>
+                    <p><a href="about.html" style="color: white; text-decoration: none;">About</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Get In Touch</h3>
+                    <p>Email: stuco@ourschool.edu</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Office: Room 201, Main Building</p>
+                    
+                    <div class="social-links">
+                        <a href="https://facebook.com">FB</a>
+                        <a href="https://instagram.com">IG</a>
+                        <a href="https://twitter.com">TW</a>
+                        <a href="https://youtube.com">YT</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Student Council Website. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
